@@ -48,6 +48,13 @@ app.get('*', function (req, res) {
 });
 // --------------------------------------------------------------- //
 
+// ------------- Listen for POST requests at '/' ------------- //
+app.post('/', function (req, res) {
+   const controller = require('./src/controllers/home.js'); // Import controller
+   controller.handle(req, res); // Give the controller the req and res variables, and let it handle the request
+});
+// --------------------------------------------------------------- //
+
 // --------- Start server, listen on port 80 --------- //
 app.listen(80, () => {
    // You can now start up the server by typing 'npm start' in the console
