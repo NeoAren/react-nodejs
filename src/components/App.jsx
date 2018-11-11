@@ -4,6 +4,8 @@
 
 import React from 'react'; // Import React
 
+import Home from './Home.jsx'; // Import another component
+
 /*
    A react component is basically a class, that extends React's Component class. This Component class
    provides our component with all the goodnesses of react
@@ -36,10 +38,12 @@ class App extends React.Component {
    render() {
       // We can run javascript functions and logics as well
       const text = <h1>{this.state.text}</h1>;
+
+      // Render the text constant, then render the Home component with the App components state as its prop
       return (
          <div>
-            <p>React - NodeJS example</p>
             {text}
+            <Home state={this.state} />
          </div>
       );
    }
