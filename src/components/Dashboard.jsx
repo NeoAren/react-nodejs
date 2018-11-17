@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -8,11 +8,15 @@ class Dashboard extends React.Component {
   }
 
   render() {
-    // Use Link elements inside router to navigate
+    if (this.props.isLoggedIn === false) {
+      return <Redirect to="/login" />;
+    }
     return (
       <div>
         <h3>You are on the /dashboard page</h3>
         <Link to="/">Go to /</Link>
+        <br />
+        <button onClick={this.props.action}>Log out</button>
       </div>
     );
   }

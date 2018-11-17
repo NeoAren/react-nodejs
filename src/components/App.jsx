@@ -25,13 +25,13 @@ class App extends React.Component {
   // When the 'App' component is created, the constructor is going to be called first.
   constructor(props) {
     super(props); // Get props, more on those below
-    this.state = { text: "Hello world!", loggedIn: false }; // Set the state
+    this.state = { text: "Hello world!", isLoggedIn: false }; // Set the state
     this.handler = this.handler.bind(this);
   }
 
   handler() {
     this.setState({
-      loggedIn: true
+      isLoggedIn: !this.state.isLoggedIn
     });
     console.log("handler used");
   }
@@ -50,14 +50,6 @@ class App extends React.Component {
     // We can run javascript functions and logics as well
     const text = <h1>{this.state.text}</h1>;
 
-    if (this.state.loggedIn == true) {
-      return (
-        <Router>
-          <Redirect to="/dashboard" />
-        </Router>
-      );
-    }
-
     return (
       <div>
         {text}
@@ -66,21 +58,29 @@ class App extends React.Component {
             <Route
               exact
               path="/login"
-              render={() => <Login action={this.handler} />}
+              render={() => (
+                <Login
+                  action={this.handler}
+                  isLoggedIn={this.state.isLoggedIn}
+                />
+              )}
             />
             <Route
               exact
               path="/dashboard"
-              render={() => <Dashboard action={this.handler} />}
+              render={() => (
+                <Dashboard
+                  action={this.handler}
+                  isLoggedIn={this.state.isLoggedIn}
+                />
+              )}
             />
             <Route
               path="/"
               render={() => (
-                <div>
-                  <Link to="/login">Login</Link>
-                  <br />
-                  <Link to="/dashboard">Dashboard</Link>
-                </div>
+                <Redirect
+                  to={this.state.isLoggedIn ? "/dashboard" : "/login"}
+                />
               )}
             />
           </Switch>
