@@ -4,3 +4,8 @@
    width: 100%;
    background-color: #cccccc;
 }
+
+button {
+   width: 200;
+   background-color: blue;
+}
